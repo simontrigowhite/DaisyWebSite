@@ -12,11 +12,11 @@ p {
 }
 
 #startClick, #nextClick {
-    width=250px;
+    width: 250px;
 }
 
 #lastClick {
-    width=400px;
+    width: 450px;
 }
 
 .left-side {
