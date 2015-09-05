@@ -11,6 +11,14 @@ p {
     font-size: 18px;
 }
 
+#startClick, #nextClick {
+    width=250px;
+}
+
+#lastClick {
+    width=400px;
+}
+
 .left-side {
     float: left;
 }
