@@ -7,7 +7,7 @@ $(function() {
     $("#goHome").hide();
     
 
-    $("#startClick").click( 
+    $("#firstPicture").click( 
         function() {
 
             $("#nextBit").show("slow");
@@ -15,7 +15,7 @@ $(function() {
         }
     );
 
-    $("#nextClick").click( 
+    $("#nextPicture").click( 
         function() {
 
             $("#lastBit").show("slow");
@@ -23,7 +23,7 @@ $(function() {
         }
     );
     
-    $("#lastClick").click( 
+    $("#lastPicture").click( 
         function() {
 
             $("#goHome").show();
