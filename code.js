@@ -9,19 +9,25 @@ $(function() {
 
     $("#startClick").click( 
         function() {
+
             $("#nextBit").show("slow");
+
         }
     );
 
     $("#nextClick").click( 
         function() {
+
             $("#lastBit").show("slow");
+
         }
     );
     
     $("#lastClick").click( 
         function() {
+
             $("#goHome").show();
+
         }
     );
 

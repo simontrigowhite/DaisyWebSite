@@ -21,6 +21,7 @@ p {
 
 .left-side {
     float: left;
+    padding: 20px;
 }
 
 .right-side {
