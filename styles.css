@@ -1,0 +1,31 @@
+// Styles for the quiz
+
+h1 {
+    font-family: Sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+p {
+    font-family: Sans-serif;
+    font-size: 18px;
+}
+
+.left-side {
+    float: left;
+}
+
+.right-side {
+    margin-left: 520px;
+}
+
+.thanks {
+    color: green;
+}
+
+.thanks {
+    margin-top: 20px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: Red;    
+}
