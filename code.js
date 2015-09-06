@@ -5,7 +5,7 @@ $(function() {
     $("#nextBit").hide();
     $("#lastBit").hide();
     $("#goHome").hide();
-    
+    $("#actualLastBit").hide();
 
     $("#firstPicture").click( 
         function() {
@@ -27,6 +27,14 @@ $(function() {
         function() {
 
             $("#goHome").show();
+
+        }
+    );
+
+    $("#goHome").click( 
+        function() {
+
+            $("#actualLastBit").show();
 
         }
     );
