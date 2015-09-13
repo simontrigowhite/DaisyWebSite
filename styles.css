@@ -35,4 +35,11 @@ p {
 
 .right-side {
     margin-left: 520px;
+    23:37 13/09/2015float: reset;
+}
+
+.start-again {
+    font-size: 12px;
+    border-style: solid;
+    border-color: Green;
 }

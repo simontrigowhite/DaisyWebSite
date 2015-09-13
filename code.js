@@ -3,31 +3,22 @@
 
 $(function() {
 
-    var a = getCookie('simon');
+    if (!getCookie("doneFirst"))
+        $("#nextBit").hide();
 
-    if (a)
-        alert('yes a');
+    if (!getCookie("doneNext"))
+        $("#lastBit").hide();
 
-    setCookie('simon', 'something', 10);
-
-    var b = getCookie('simon');
-
-    if (b)
-        alert('yes b');
-
-    deleteCookie('simon');
-
-
-    $("#nextBit").hide();
-    $("#lastBit").hide();
     $("#goHome").hide();
+    
     $("#actualLastBit").hide();
+
 
     $("#firstPicture").click( 
         function() {
 
             $("#nextBit").show("slow");
-
+            setCookie("doneFirst","yes");
         }
     );
 
@@ -35,7 +26,7 @@ $(function() {
         function() {
 
             $("#lastBit").show("slow");
-
+            setCookie("doneNext","yes");
         }
     );
     
@@ -43,7 +34,6 @@ $(function() {
         function() {
 
             $("#goHome").show();
-
         }
     );
 
@@ -51,7 +41,24 @@ $(function() {
         function() {
 
             $("#actualLastBit").show();
+        }
+    );
 
+    $("#startAgain").click(
+        function() {
+
+            resetCookie("doneFirst");
+            resetCookie("doneNext");
+
+    if (!getCookie("doneFirst"))
+        $("#nextBit").hide();
+
+    if (!getCookie("doneNext"))
+        $("#lastBit").hide();
+
+    $("#goHome").hide();
+    
+    $("#actualLastBit").hide();
         }
     );
 
