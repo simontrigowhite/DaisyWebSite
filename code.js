@@ -3,57 +3,52 @@
 
 $(function() {
 
-    if (!getCookie("doneFirst"))
-        $("#nextBit").hide();
+    hideBits();
 
-    if (!getCookie("doneNext"))
-        $("#lastBit").hide();
+    addClick("#firstPicture", function() {
 
-    $("#goHome").hide();
-    
-    $("#actualLastBit").hide();
-
-
-    $("#firstPicture").click( 
-        function() {
-
-            $("#nextBit").show("slow");
             setCookie("doneFirst","yes");
+            $("#nextBit").show("slow");
         }
     );
-    $("#firstPicture").css({"cursor":"hand"});
 
-    $("#nextPicture").click( 
-        function() {
+    addClick("#nextPicture", function() {
 
-            $("#lastBit").show("slow");
             setCookie("doneNext","yes");
+            $("#lastBit").show("slow");
         }
     );
-    $("#nextPicture").css({"cursor":"hand"});
     
-    $("#lastPicture").click( 
-        function() {
+    addClick("#lastPicture", function() {
 
             $("#goHome").show();
         }
     );
-    $("#lastPicture").css({"cursor":"hand"});
 
-    $("#goHome").click( 
-        function() {
+    addClick("#goHome", function() {
 
             $("#actualLastBit").show();
         }
     );
-    $("#goHome").css({"cursor":"hand"});
 
-    $("#startAgain").click(
-        function() {
+    addClick("#startAgain", function() {
 
             resetCookie("doneFirst");
             resetCookie("doneNext");
+            hideBits();
+        }
+    );
 
+});
+
+
+function addClick(element, action) {
+    $(element).click(action);
+    $(element).css({"cursor":"hand"});
+}
+
+
+function hideBits() {
     if (!getCookie("doneFirst"))
         $("#nextBit").hide();
 
@@ -63,9 +58,4 @@ $(function() {
     $("#goHome").hide();
     
     $("#actualLastBit").hide();
-        }
-    );
-    $("#startAgain").css({"cursor":"hand"});
-
-});
-
+}
