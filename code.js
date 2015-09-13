@@ -2,6 +2,18 @@
 
 $(function() {
 
+    var a = Cookies.get('simon');
+
+    if (a)
+        alert('yes');
+
+    Cookies.set('simon', 'something');
+
+    var b = Cookies.get('simon');
+
+    if (b)
+        alert('yes');
+
     $("#nextBit").hide();
     $("#lastBit").hide();
     $("#goHome").hide();
