@@ -1,36 +1,22 @@
 // Code for the quiz
 
-function createCookie(name, value, days) {
-    localStorage.setItem(name, value);
-}
-
-function readCookie(name) {
-    return localStorage.getItem(name);
-}
-
-function eraseCookie(name) {
-    localStorage.removeItem(name);
-}
-
-
 
 $(function() {
 
-    var a = readCookie('simon');
+    var a = getCookie('simon');
 
     if (a)
         alert('yes a');
 
-    var cookies = document.cookie;
+    setCookie('simon', 'something', 10);
 
-    createCookie('simon', 'something', 10);
-
-    var b = readCookie('simon');
+    var b = getCookie('simon');
 
     if (b)
         alert('yes b');
 
-    eraseCookie('simon');
+    deleteCookie('simon');
+
 
     $("#nextBit").hide();
     $("#lastBit").hide();
