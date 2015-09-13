@@ -21,6 +21,7 @@ $(function() {
             setCookie("doneFirst","yes");
         }
     );
+    $("#firstPicture").css({"cursor":"hand"});
 
     $("#nextPicture").click( 
         function() {
@@ -29,6 +30,7 @@ $(function() {
             setCookie("doneNext","yes");
         }
     );
+    $("#nextPicture").css({"cursor":"hand"});
     
     $("#lastPicture").click( 
         function() {
@@ -36,6 +38,7 @@ $(function() {
             $("#goHome").show();
         }
     );
+    $("#lastPicture").css({"cursor":"hand"});
 
     $("#goHome").click( 
         function() {
@@ -43,6 +46,7 @@ $(function() {
             $("#actualLastBit").show();
         }
     );
+    $("#goHome").css({"cursor":"hand"});
 
     $("#startAgain").click(
         function() {
@@ -61,6 +65,7 @@ $(function() {
     $("#actualLastBit").hide();
         }
     );
+    $("#startAgain").css({"cursor":"hand"});
 
 });
 

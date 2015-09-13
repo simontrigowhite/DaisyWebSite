@@ -6,7 +6,7 @@ h1 {
     font-weight: bold;
 }
 
-p {
+body {
     font-family: Sans-serif;
     font-size: 18px;
 }
@@ -35,7 +35,6 @@ p {
 
 .right-side {
     margin-left: 520px;
-    23:37 13/09/2015float: reset;
 }
 
 .start-again {
