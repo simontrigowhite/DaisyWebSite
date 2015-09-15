@@ -1,21 +1,21 @@
 // Code for the quiz - the functionality
-
+// to do: make buttons side by side, false is green, true is purple, and click makes grey border
 
 $(function() {
 
     hideBits();
 
-    addClick($("#true"), function() {
+    addClick($("#trueButton"), function() {
 
-         $("#true").css({"background-color":"grey"});
-         $("#false").css({"background-color":"white"});
+            $("#trueButton").css({"background-color":"grey"});
+            $("#falseButton").css({"background-color":"white"});
         }
     );
 
-    addClick($("#false"), function() {
+    addClick($("#falseButton"), function() {
 
-         $("#false").css({"background-color":"grey"});
-         $("#true").css({"background-color":"white"});
+            $("#falseButton").css({"background-color":"grey"});
+            $("#trueButton").css({"background-color":"white"});
         }
     );
 
@@ -51,8 +51,8 @@ $(function() {
             resetCookie("doneNext");
             hideBits();
 
-         $("#false").css({"background-color":"white"});
-         $("#true").css({"background-color":"white"});
+            $("#falseButton").css({"background-color":"white"});
+            $("#trueButton").css({"background-color":"white"});
             
         }
     );
