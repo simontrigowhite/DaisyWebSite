@@ -11,6 +11,16 @@ body {
     font-size: 18px;
 }
 
+.button {
+    float: left;
+    padding: 5px;
+}
+
+.after-buttons {
+    clear: left;
+    padding-top: 10px;
+}
+
 #firstPicture, #nextPicture {
     width: 250px;
 }
