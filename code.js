@@ -7,15 +7,15 @@ $(function() {
 
     addClick($("#trueButton"), function() {
 
-            $("#trueButton").css({"background-color":"grey"});
-            $("#falseButton").css({"background-color":"white"});
+            $("#trueButton").addClass("selected");
+            $("#falseButton").removeClass("selected");
         }
     );
 
     addClick($("#falseButton"), function() {
 
-            $("#falseButton").css({"background-color":"grey"});
-            $("#trueButton").css({"background-color":"white"});
+            $("#trueButton").removeClass("selected");
+            $("#falseButton").addClass("selected");
         }
     );
 
@@ -51,8 +51,8 @@ $(function() {
             resetCookie("doneNext");
             hideBits();
 
-            $("#falseButton").css({"background-color":"white"});
-            $("#trueButton").css({"background-color":"white"});
+            $("#falseButton").removeClass("selected");
+            $("#trueButton").removeClass("selected");
             
         }
     );
