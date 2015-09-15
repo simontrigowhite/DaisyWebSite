@@ -1,5 +1,7 @@
+// Useful functions
 
-// Actually uses local storage instead of cookies, because it is more modern
+
+// Code for cookeies - actually uses local storage instead of cookies, because it is more modern
 
 function setCookie(name, value, days) {
     localStorage.setItem(name, value);

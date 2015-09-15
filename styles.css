@@ -1,4 +1,4 @@
-/* Styles for the quiz */
+/* Code for the quiz - the styles */
 
 h1 {
     font-family: Sans-serif;
@@ -29,15 +29,13 @@ body {
     border-color: blue;    
 }
 
-.left-side {
-    float: left;
-}
-
 .right-side {
-    margin-left: 520px;
+    float: right;
 }
 
 .start-again {
+    width: 100px;
+    text-align: center;
     font-size: 12px;
     border-style: solid;
     border-width: 1px;

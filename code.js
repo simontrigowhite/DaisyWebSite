@@ -1,4 +1,4 @@
-// Code for the quiz
+// Code for the quiz - the functionality
 
 
 $(function() {
