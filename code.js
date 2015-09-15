@@ -1,8 +1,9 @@
-// Code for the quiz - the functionality
+// Code for the quiz - the functionality. Written in JavaScript language.
 
 $(function() {
 
     hideBits();
+
     selectButtons();
 
     if (!getCookie("answeredQ1")) {
@@ -64,30 +65,6 @@ $(function() {
 
 });
 
-function submit() {
-            
-                removeClick($("#trueButton"));
-                removeClick($("#falseButton"));
-                removeClick($("#submitButton"));
-
-                if ($("#trueButton").hasClass("selected"))
-                    setCookie("answeredQ1", "true");
-                else
-                    setCookie("answeredQ1", "false");
-
-                $("#firstBit").show("slow");
-}
-
-
-function selectButtons() {
-
-    if (getCookie("answeredQ1") == "true")
-        $("#trueButton").addClass("selected");
-
-    else if (getCookie("answeredQ1") == "false")
-        $("#falseButton").addClass("selected");
-}
-
 
 function hideBits() {
     
@@ -103,4 +80,30 @@ function hideBits() {
     $("#goHome").hide();
     
     $("#actualLastBit").hide();
+}
+
+
+function selectButtons() {
+
+    if (getCookie("answeredQ1") == "true")
+        $("#trueButton").addClass("selected");
+
+    else if (getCookie("answeredQ1") == "false")
+        $("#falseButton").addClass("selected");
+}
+
+
+function submit() {
+            
+    removeClick($("#trueButton"));
+    removeClick($("#falseButton"));
+    removeClick($("#submitButton"));
+
+    if ($("#trueButton").hasClass("selected"))
+        setCookie("answeredQ1", "true");
+
+    else if ($("#falseButton").hasClass("selected"))
+        setCookie("answeredQ1", "false");
+
+    $("#firstBit").show("slow");
 }
