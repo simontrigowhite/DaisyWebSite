@@ -22,13 +22,13 @@ body {
     text-align: center;
 
     border-style: solid;
-    border-width: 1px;
+    border-width: 0px;
     border-color: DimGrey;
 }
 
 .button.selected {
     border-width: 5px;
-    margin: 1px;
+    margin: 0px;
 }
 
 .button.true {
