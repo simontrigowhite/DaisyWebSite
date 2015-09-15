@@ -5,33 +5,33 @@ $(function() {
 
     hideBits();
 
-    addClick("#firstPicture", function() {
+    addClick($("#firstPicture"), function() {
 
             setCookie("doneFirst","yes");
             $("#nextBit").show("slow");
         }
     );
 
-    addClick("#nextPicture", function() {
+    addClick($("#nextPicture"), function() {
 
             setCookie("doneNext","yes");
             $("#lastBit").show("slow");
         }
     );
     
-    addClick("#lastPicture", function() {
+    addClick($("#lastPicture"), function() {
 
             $("#goHome").show();
         }
     );
 
-    addClick("#goHome", function() {
+    addClick($("#goHome"), function() {
 
             $("#actualLastBit").show();
         }
     );
 
-    addClick("#startAgain", function() {
+    addClick($("#startAgain"), function() {
 
             resetCookie("doneFirst");
             resetCookie("doneNext");
@@ -40,12 +40,6 @@ $(function() {
     );
 
 });
-
-
-function addClick(element, action) {
-    $(element).click(action);
-    $(element).css({"cursor":"hand"});
-}
 
 
 function hideBits() {

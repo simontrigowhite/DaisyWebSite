@@ -12,3 +12,13 @@ function getCookie(name) {
 function resetCookie(name) {
     localStorage.removeItem(name);
 }
+
+
+// Other code
+
+function addClick(element, action) {
+    element.click(action);
+    element.css({"cursor":"hand"});
+}
+
+
