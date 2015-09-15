@@ -1,5 +1,4 @@
 // Code for the quiz - the functionality
-// to do: make buttons side by side, false is green, true is purple, and click makes grey border
 
 $(function() {
 
@@ -53,7 +52,6 @@ $(function() {
 
             $("#falseButton").removeClass("selected");
             $("#trueButton").removeClass("selected");
-            
         }
     );
 
@@ -61,10 +59,10 @@ $(function() {
 
 
 function hideBits() {
-    if (!getCookie("doneFirst"))
+    if (getCookie("doneFirst") != "yes")
         $("#nextBit").hide();
 
-    if (!getCookie("doneNext"))
+    if (getCookie("doneNext") != "yes")
         $("#lastBit").hide();
 
     $("#goHome").hide();
