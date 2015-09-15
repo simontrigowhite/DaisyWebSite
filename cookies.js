@@ -23,4 +23,9 @@ function addClick(element, action) {
     element.css({"cursor":"hand"});
 }
 
+function removeClick(element) {
+    element.off("click");
+    element.css({"cursor":"inherit"});
+}
+
 

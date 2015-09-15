@@ -3,20 +3,28 @@
 $(function() {
 
     hideBits();
+    selectButtons();
 
-    addClick($("#trueButton"), function() {
+    if (!getCookie("answeredQ1")) {
+    
+        addClick($("#trueButton"), function() {
+    
+                $("#trueButton").addClass("selected");
+                $("#falseButton").removeClass("selected");
 
-            $("#trueButton").addClass("selected");
-            $("#falseButton").removeClass("selected");
-        }
-    );
+                addClick($("#submitButton"), submit);
+            }
+        );
 
-    addClick($("#falseButton"), function() {
+        addClick($("#falseButton"), function() {
 
-            $("#trueButton").removeClass("selected");
-            $("#falseButton").addClass("selected");
-        }
-    );
+                $("#trueButton").removeClass("selected");
+                $("#falseButton").addClass("selected");
+
+                addClick($("#submitButton"), submit);
+            }
+        );
+    }
 
     addClick($("#firstPicture"), function() {
 
@@ -46,19 +54,46 @@ $(function() {
 
     addClick($("#startAgain"), function() {
 
+            resetCookie("answeredQ1");
             resetCookie("doneFirst");
             resetCookie("doneNext");
-            hideBits();
-
-            $("#falseButton").removeClass("selected");
-            $("#trueButton").removeClass("selected");
+            
+            location.reload(false);
         }
     );
 
 });
 
+function submit() {
+            
+                removeClick($("#trueButton"));
+                removeClick($("#falseButton"));
+                removeClick($("#submitButton"));
+
+                if ($("#trueButton").hasClass("selected"))
+                    setCookie("answeredQ1", "true");
+                else
+                    setCookie("answeredQ1", "false");
+
+                $("#firstBit").show("slow");
+}
+
+
+function selectButtons() {
+
+    if (getCookie("answeredQ1") == "true")
+        $("#trueButton").addClass("selected");
+
+    else if (getCookie("answeredQ1") == "false")
+        $("#falseButton").addClass("selected");
+}
+
 
 function hideBits() {
+    
+    if (!getCookie("answeredQ1"))
+        $("#firstBit").hide();
+
     if (getCookie("doneFirst") != "yes")
         $("#nextBit").hide();
 
