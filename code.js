@@ -5,6 +5,20 @@ $(function() {
 
     hideBits();
 
+    addClick($("#true"), function() {
+
+         $("#true").css({"background-color":"grey"});
+         $("#false").css({"background-color":"white"});
+        }
+    );
+
+    addClick($("#false"), function() {
+
+         $("#false").css({"background-color":"grey"});
+         $("#true").css({"background-color":"white"});
+        }
+    );
+
     addClick($("#firstPicture"), function() {
 
             setCookie("doneFirst","yes");
@@ -36,6 +50,10 @@ $(function() {
             resetCookie("doneFirst");
             resetCookie("doneNext");
             hideBits();
+
+         $("#false").css({"background-color":"white"});
+         $("#true").css({"background-color":"white"});
+            
         }
     );
 
