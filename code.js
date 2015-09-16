@@ -1,6 +1,10 @@
 // Code for the quiz - the functionality. Written in JavaScript language.
 
-$(function() {
+
+$(document).ready(runPage);
+
+
+function runPage() {
 
     hideBits();
 
@@ -8,62 +12,71 @@ $(function() {
 
     if (!getCookie("answeredQ1")) {
     
-        addClick($("#trueButton"), function() {
-    
-                $("#trueButton").addClass("selected");
-                $("#falseButton").removeClass("selected");
-
-                addClick($("#submitButton"), submit);
-            }
-        );
-
-        addClick($("#falseButton"), function() {
-
-                $("#trueButton").removeClass("selected");
-                $("#falseButton").addClass("selected");
-
-                addClick($("#submitButton"), submit);
-            }
-        );
+        addClick($("#trueButton"), trueClick);
+        addClick($("#falseButton"), falseClick);
     }
 
-    addClick($("#firstPicture"), function() {
+    addClick($("#firstPicture"), firstPictureClick);
+    addClick($("#nextPicture"), nextPictureClick);
+    addClick($("#lastPicture"), lastPictureClick);
+    addClick($("#goHome"), goHomeClick);
 
-            setCookie("doneFirst","yes");
-            $("#nextBit").show("slow");
-        }
-    );
+    addClick($("#startAgain"), startAgainClick);
+}
 
-    addClick($("#nextPicture"), function() {
 
-            setCookie("doneNext","yes");
-            $("#lastBit").show("slow");
-        }
-    );
+function trueClick() {
     
-    addClick($("#lastPicture"), function() {
+    $("#trueButton").addClass("selected");
+    $("#falseButton").removeClass("selected");
 
-            $("#goHome").show();
-        }
-    );
+    addClick($("#submitButton"), submit);
+}
 
-    addClick($("#goHome"), function() {
 
-            $("#actualLastBit").show();
-        }
-    );
+function falseClick() {
 
-    addClick($("#startAgain"), function() {
+    $("#trueButton").removeClass("selected");
+    $("#falseButton").addClass("selected");
 
-            resetCookie("answeredQ1");
-            resetCookie("doneFirst");
-            resetCookie("doneNext");
+    addClick($("#submitButton"), submit);
+}
+
+
+function firstPictureClick() {
+
+    setCookie("doneFirst","yes");
+    $("#nextBit").show("slow");
+}
+
+
+function nextPictureClick() {
+
+    setCookie("doneNext","yes");
+    $("#lastBit").show("slow");
+}
+
+
+function lastPictureClick() {
+
+    $("#goHome").show();
+}
+
+
+function goHomeClick() {
+
+    $("#actualLastBit").show();
+}
+
+
+function startAgainClick() {
+
+    resetCookie("answeredQ1");
+    resetCookie("doneFirst");
+    resetCookie("doneNext");
             
-            location.reload(false);
-        }
-    );
-
-});
+    location.reload(false)
+}
 
 
 function hideBits() {
