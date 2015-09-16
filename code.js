@@ -30,7 +30,7 @@ function trueClick() {
     $("#trueButton").addClass("selected");
     $("#falseButton").removeClass("selected");
 
-    addClick($("#submitButton"), submit);
+    addClick($("#submitButton"), submitClick);
 }
 
 
@@ -39,7 +39,7 @@ function falseClick() {
     $("#trueButton").removeClass("selected");
     $("#falseButton").addClass("selected");
 
-    addClick($("#submitButton"), submit);
+    addClick($("#submitButton"), submitClick);
 }
 
 
@@ -79,6 +79,22 @@ function startAgainClick() {
 }
 
 
+function submitClick() {
+            
+    removeClick($("#trueButton"));
+    removeClick($("#falseButton"));
+    removeClick($("#submitButton"));
+
+    if ($("#trueButton").hasClass("selected"))
+        setCookie("answeredQ1", "true");
+
+    else if ($("#falseButton").hasClass("selected"))
+        setCookie("answeredQ1", "false");
+
+    $("#firstBit").show("slow");
+}
+
+
 function hideBits() {
     
     if (!getCookie("answeredQ1"))
@@ -103,20 +119,4 @@ function selectButtons() {
 
     else if (getCookie("answeredQ1") == "false")
         $("#falseButton").addClass("selected");
-}
-
-
-function submit() {
-            
-    removeClick($("#trueButton"));
-    removeClick($("#falseButton"));
-    removeClick($("#submitButton"));
-
-    if ($("#trueButton").hasClass("selected"))
-        setCookie("answeredQ1", "true");
-
-    else if ($("#falseButton").hasClass("selected"))
-        setCookie("answeredQ1", "false");
-
-    $("#firstBit").show("slow");
 }
