@@ -16,11 +16,6 @@ function runPage() {
         addClick($("#falseButton"), falseClick);
     }
 
-    addClick($("#firstPicture"), firstPictureClick);
-    addClick($("#nextPicture"), nextPictureClick);
-    addClick($("#lastPicture"), lastPictureClick);
-    addClick($("#goHome"), goHomeClick);
-
     addClick($("#startAgain"), startAgainClick);
 }
 
@@ -40,32 +35,6 @@ function falseClick() {
     $("#falseButton").addClass("selected");
 
     addClick($("#submitButton"), submitClick);
-}
-
-
-function firstPictureClick() {
-
-    setCookie("doneFirst","yes");
-    $("#nextBit").show("slow");
-}
-
-
-function nextPictureClick() {
-
-    setCookie("doneNext","yes");
-    $("#lastBit").show("slow");
-}
-
-
-function lastPictureClick() {
-
-    $("#goHome").show();
-}
-
-
-function goHomeClick() {
-
-    $("#actualLastBit").show();
 }
 
 
@@ -100,15 +69,6 @@ function hideBits() {
     if (!getCookie("answeredQ1"))
         $("#firstBit").hide();
 
-    if (getCookie("doneFirst") != "yes")
-        $("#nextBit").hide();
-
-    if (getCookie("doneNext") != "yes")
-        $("#lastBit").hide();
-
-    $("#goHome").hide();
-    
-    $("#actualLastBit").hide();
 }
 
 

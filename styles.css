@@ -48,24 +48,6 @@ body {
     padding-top: 10px;
 }
 
-#firstPicture, #nextPicture {
-    width: 250px;
-}
-
-#lastPicture {
-    width: 350px;
-}
-
-.thanks p {
-    color: Green;
-}
-
-.thanks img {
-    border-style: solid;
-    border-width: 4px;
-    border-color: Blue;    
-}
-
 .right-side {
     float: right;
 }
