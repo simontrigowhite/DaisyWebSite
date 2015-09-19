@@ -6,61 +6,61 @@ $(document).ready(runPage);
 
 function runPage() {
 
-    setupQuestion("#trueButton", "#falseButton", "#submitButton", "answeredQ1", "#question2")
-    setupQuestion("#trueButto", "#falseButto", "#submitButto", "answeredQ2", "#question3")
+    setupQuestion($("#trueButton"), $("#falseButton"), $("#submitButton"), $("#question2"), "answeredQ1")
+    setupQuestion($("#trueButto"), $("#falseButto"), $("#submitButto"), $("#question3"), "answeredQ2")
 
     addClick($("#startAgain"), startAgainClick);
 }
 
 
-function setupQuestion(trueId, falseId, submitId, cookieName, nextQuestionId) {
+function setupQuestion(trueButton, falseButton, submitButton, nextQuestion, cookieName) {
 
     if (getCookie(cookieName)) {
 
         if (getCookie(cookieName) == "true")
-            $(trueId).addClass("selected");
+            trueButton.addClass("selected");
 
         else if (getCookie(cookieName) == "false")
-            $(falseId).addClass("selected");
+            falseButton.addClass("selected");
 
     }
     else {
 
-        addClick($(trueId), trueClick);
-        addClick($(falseId), falseClick);
+        addClick(trueButton, trueClick);
+        addClick(falseButton, falseClick);
 
-        $(nextQuestionId).hide();
+        nextQuestion.hide();
     }
 
     function trueClick() {
     
-        $(trueId).addClass("selected");
-        $(falseId).removeClass("selected");
+        trueButton.addClass("selected");
+        falseButton.removeClass("selected");
 
-        addClick($(submitId), submitClick);
+        addClick(submitButton, submitClick);
     }
 
     function falseClick() {
 
-        $(trueId).removeClass("selected");
-        $(falseId).addClass("selected");
+        trueButton.removeClass("selected");
+        falseButton.addClass("selected");
 
-        addClick($(submitId), submitClick);
+        addClick(submitButton, submitClick);
     }
 
     function submitClick() {
             
-        if ($(trueId).hasClass("selected"))
+        if (trueButton.hasClass("selected"))
             setCookie(cookieName, "true");
 
-        else if ($(falseId).hasClass("selected"))
+        else if (falseButton.hasClass("selected"))
             setCookie(cookieName, "false");
 
-        removeClick($(trueId));
-        removeClick($(falseId));
-        removeClick($(submitId));
+        removeClick(trueButton);
+        removeClick(falseButton);
+        removeClick(submitButton);
 
-        $(nextQuestionId).show("slow");
+        nextQuestion.show("slow");
     }
 }
 
