@@ -24,6 +24,19 @@ function runPage() {
     }
 
     addClick($("#startAgain"), startAgainClick);
+addClick($("#trueButto"), trueClic);
+        addClick($("#falseButto"), falseClic);
+
+    if (getCookie("answeredQ2")) {
+
+        if (getCookie("answeredQ2") == "true")
+            $("#trueButto").addClass("selected");
+
+        else if (getCookie("answeredQ2") == "false")
+            $("#falseButto").addClass("selected");
+
+    }
+
 }
 
 
@@ -35,7 +48,13 @@ function trueClick() {
     addClick($("#submitButton"), submitClick);
 }
 
+function trueClic() {
+    
+    $("#trueButto").addClass("selected");
+    $("#falseButto").removeClass("selected");
 
+    addClick($("#submitButto"), submitClic);
+}
 function falseClick() {
 
     $("#trueButton").removeClass("selected");
@@ -44,6 +63,13 @@ function falseClick() {
     addClick($("#submitButton"), submitClick);
 }
 
+function falseClic() {
+
+    $("#trueButto").removeClass("selected");
+    $("#falseButto").addClass("selected");
+
+    addClick($("#submitButto"), submitClic);
+}
 
 function submitClick() {
             
@@ -59,6 +85,21 @@ function submitClick() {
 
     $("#question2").show("slow");
 }
+function submitClic() {
+            
+    if ($("#trueButto").hasClass("selected"))
+        setCookie("answeredQ2", "true");
+
+    else if ($("#falseButto").hasClass("selected"))
+        setCookie("answeredQ2", "false");
+
+    removeClick($("#trueButto"));
+    removeClick($("#falseButto"));
+    removeClick($("#submitButto"));
+
+    $("#question3").show("slow");
+}
+
 
 
 function startAgainClick() {
