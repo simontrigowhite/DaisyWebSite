@@ -24,8 +24,9 @@ function runPage() {
     }
 
     addClick($("#startAgain"), startAgainClick);
-addClick($("#trueButto"), trueClic);
-        addClick($("#falseButto"), falseClic);
+    
+    addClick($("#trueButto"), trueClic);
+    addClick($("#falseButto"), falseClic);
 
     if (getCookie("answeredQ2")) {
 
@@ -36,7 +37,6 @@ addClick($("#trueButto"), trueClic);
             $("#falseButto").addClass("selected");
 
     }
-
 }
 
 
@@ -55,6 +55,7 @@ function trueClic() {
 
     addClick($("#submitButto"), submitClic);
 }
+
 function falseClick() {
 
     $("#trueButton").removeClass("selected");
@@ -85,6 +86,7 @@ function submitClick() {
 
     $("#question2").show("slow");
 }
+
 function submitClic() {
             
     if ($("#trueButto").hasClass("selected"))
@@ -99,8 +101,6 @@ function submitClic() {
 
     $("#question3").show("slow");
 }
-
-
 
 function startAgainClick() {
 
