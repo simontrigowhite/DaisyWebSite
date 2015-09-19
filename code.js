@@ -6,64 +6,77 @@ $(document).ready(runPage);
 
 function runPage() {
 
-    setupQuestion($("#trueButton"), $("#falseButton"), $("#submitButton"), $("#question2"), "answeredQ1")
-    setupQuestion($("#trueButto"), $("#falseButto"), $("#submitButto"), $("#question3"), "answeredQ2")
+    setupQuestion( {
+        trueButton: $("#trueButton"), 
+        falseButton: $("#falseButton"), 
+        submitButton: $("#submitButton"), 
+        nextBit: $("#question2"), 
+        cookieName: "answeredQ1"
+    })
+
+    setupQuestion( {
+        trueButton: $("#trueButto"), 
+        falseButton: $("#falseButto"), 
+        submitButton: $("#submitButto"), 
+        nextBit: $("#question3"), 
+        cookieName: "answeredQ2"
+    })
 
     addClick($("#startAgain"), startAgainClick);
 }
 
 
-function setupQuestion(trueButton, falseButton, submitButton, nextQuestion, cookieName) {
+function setupQuestion(elements) {
 
-    if (getCookie(cookieName)) {
+    if (getCookie(elements.cookieName)) {
 
-        if (getCookie(cookieName) == "true")
-            trueButton.addClass("selected");
+        if (getCookie(elements.cookieName) == "true")
+            elements.trueButton.addClass("selected");
 
-        else if (getCookie(cookieName) == "false")
-            falseButton.addClass("selected");
+        else if (getCookie(elements.cookieName) == "false")
+            elements.falseButton.addClass("selected");
 
-        submitButton.hide();
+        elements.submitButton.hide();
     }
     else {
 
-        addClick(trueButton, trueClick);
-        addClick(falseButton, falseClick);
+        addClick(elements.trueButton, trueClick);
+        addClick(elements.falseButton, falseClick);
 
-        nextQuestion.hide();
+        elements.nextBit.hide();
     }
 
     function trueClick() {
     
-        trueButton.addClass("selected");
-        falseButton.removeClass("selected");
+        elements.trueButton.addClass("selected");
+        elements.falseButton.removeClass("selected");
 
-        addClick(submitButton, submitClick);
+        addClick(elements.submitButton, submitClick);
     }
 
     function falseClick() {
 
-        trueButton.removeClass("selected");
-        falseButton.addClass("selected");
+        elements.trueButton.removeClass("selected");
+        elements.falseButton.addClass("selected");
 
-        addClick(submitButton, submitClick);
+        addClick(elements.submitButton, submitClick);
     }
 
     function submitClick() {
             
-        if (trueButton.hasClass("selected"))
-            setCookie(cookieName, "true");
+        if (elements.trueButton.hasClass("selected"))
+            setCookie(elements.cookieName, "true");
 
-        else if (falseButton.hasClass("selected"))
-            setCookie(cookieName, "false");
+        else if (elements.falseButton.hasClass("selected"))
+            setCookie(elements.cookieName, "false");
 
-        removeClick(trueButton);
-        removeClick(falseButton);
-        removeClick(submitButton);
+        removeClick(elements.trueButton);
+        removeClick(elements.falseButton);
+        removeClick(elements.submitButton);
 
-        submitButton.hide();
+        elements.submitButton.hide();
 
-        nextQuestion.show("slow");
+        elements.nextBit.show("slow");
     }
 }
 
