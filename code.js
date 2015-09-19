@@ -6,53 +6,31 @@ $(document).ready(runPage);
 
 function runPage() {
 
-    if (getCookie("answeredQ1")) {
-
-        if (getCookie("answeredQ1") == "true")
-            $("#trueButton").addClass("selected");
-
-        else if (getCookie("answeredQ1") == "false")
-            $("#falseButton").addClass("selected");
-
-    }
-    else {
-
-        setupQuestion("#trueButton", "#falseButton", "#submitButton", "answeredQ1", "#question2")
-
-        $("#question2").hide();
-
-    }
-
-    if (getCookie("answeredQ2")) {
-
-        if (getCookie("answeredQ2") == "true")
-            $("#trueButto").addClass("selected");
-
-        else if (getCookie("answeredQ2") == "false")
-            $("#falseButto").addClass("selected");
-
-    }
-    else {
-
-        setupQuestion("#trueButto", "#falseButto", "#submitButto", "answeredQ2", "#question3")
-
-        $("#question3").hide();
-
-    }
+    setupQuestion("#trueButton", "#falseButton", "#submitButton", "answeredQ1", "#question2")
+    setupQuestion("#trueButto", "#falseButto", "#submitButto", "answeredQ2", "#question3")
 
     addClick($("#startAgain"), startAgainClick);
-
-
-
 }
-
 
 
 function setupQuestion(trueId, falseId, submitId, cookieName, nextQuestionId) {
 
-    addClick($(trueId), trueClick);
-    addClick($(falseId), falseClick);
+    if (getCookie(cookieName)) {
 
+        if (getCookie(cookieName) == "true")
+            $(trueId).addClass("selected");
+
+        else if (getCookie(cookieName) == "false")
+            $(falseId).addClass("selected");
+
+    }
+    else {
+
+        addClick($(trueId), trueClick);
+        addClick($(falseId), falseClick);
+
+        $(nextQuestionId).hide();
+    }
 
     function trueClick() {
     
@@ -84,7 +62,6 @@ function setupQuestion(trueId, falseId, submitId, cookieName, nextQuestionId) {
 
         $(nextQuestionId).show("slow");
     }
-
 }
 
 
