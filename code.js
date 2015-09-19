@@ -23,6 +23,7 @@ function setupQuestion(trueButton, falseButton, submitButton, nextQuestion, cook
         else if (getCookie(cookieName) == "false")
             falseButton.addClass("selected");
 
+        submitButton.hide();
     }
     else {
 
@@ -59,6 +60,8 @@ function setupQuestion(trueButton, falseButton, submitButton, nextQuestion, cook
         removeClick(trueButton);
         removeClick(falseButton);
         removeClick(submitButton);
+
+        submitButton.hide();
 
         nextQuestion.show("slow");
     }
