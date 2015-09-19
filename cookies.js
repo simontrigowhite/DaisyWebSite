@@ -20,12 +20,12 @@ function resetCookie(name) {
 
 function addClick(element, action) {
     element.click(action);
-    element.css({"cursor":"hand"});
+    element.css( { "cursor": "hand" } );
 }
 
 function removeClick(element) {
     element.off("click");
-    element.css({"cursor":"inherit"});
+    element.css( { "cursor": "inherit" });
 }
 
 

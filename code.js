@@ -6,21 +6,21 @@ $(document).ready(runPage);
 
 function runPage() {
 
-    setupQuestion({
+    setupQuestion( {
         trueButton: $("#trueButton"),
         falseButton: $("#falseButton"),
         submitButton: $("#submitButton"),
         nextBit: $("#question2"),
         cookieName: "answeredQ1"
-    });
+    } );
 
-    setupQuestion({
+    setupQuestion( {
         trueButton: $("#trueButto"),
         falseButton: $("#falseButto"),
         submitButton: $("#submitButto"),
         nextBit: $("#question3"),
         cookieName: "answeredQ2"
-    });
+    } );
 
     addClick($("#startAgain"), startAgainClick);
 }
@@ -30,11 +30,7 @@ function setupQuestion(elements) {
 
     if (getCookie(elements.cookieName)) {
 
-        if (getCookie(elements.cookieName) == "true")
-            elements.trueButton.addClass("selected");
-
-        else if (getCookie(elements.cookieName) == "false")
-            elements.falseButton.addClass("selected");
+        selectTrueOrFalse();
 
         elements.submitButton.hide();
     }
@@ -64,12 +60,8 @@ function setupQuestion(elements) {
 
     function submitClick() {
 
-        if (elements.trueButton.hasClass("selected"))
-            setCookie(elements.cookieName, "true");
-
-        else if (elements.falseButton.hasClass("selected"))
-            setCookie(elements.cookieName, "false");
-
+        rememberTrueOrFalse();
+        
         removeClick(elements.trueButton);
         removeClick(elements.falseButton);
         removeClick(elements.submitButton);
@@ -77,6 +69,24 @@ function setupQuestion(elements) {
         elements.submitButton.hide();
 
         elements.nextBit.show("slow");
+    }
+    
+    function selectTrueOrFalse() {
+        
+        if (getCookie(elements.cookieName) == "true")
+            elements.trueButton.addClass("selected");
+
+        else if (getCookie(elements.cookieName) == "false")
+            elements.falseButton.addClass("selected");
+    }
+
+    function rememberTrueOrFalse() {
+        
+        if (elements.trueButton.hasClass("selected"))
+            setCookie(elements.cookieName, "true");
+
+        else if (elements.falseButton.hasClass("selected"))
+            setCookie(elements.cookieName, "false");
     }
 }
 
