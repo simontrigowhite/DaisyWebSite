@@ -3,7 +3,7 @@
 
 // Code for cookeies - actually uses local storage instead of cookies, because it is more modern
 
-function setCookie(name, value, days) {
+function setCookie(name, value) {
     localStorage.setItem(name, value);
 }
 

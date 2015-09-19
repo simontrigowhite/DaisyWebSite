@@ -6,21 +6,21 @@ $(document).ready(runPage);
 
 function runPage() {
 
-    setupQuestion( {
-        trueButton: $("#trueButton"), 
-        falseButton: $("#falseButton"), 
-        submitButton: $("#submitButton"), 
-        nextBit: $("#question2"), 
+    setupQuestion({
+        trueButton: $("#trueButton"),
+        falseButton: $("#falseButton"),
+        submitButton: $("#submitButton"),
+        nextBit: $("#question2"),
         cookieName: "answeredQ1"
-    })
+    });
 
-    setupQuestion( {
-        trueButton: $("#trueButto"), 
-        falseButton: $("#falseButto"), 
-        submitButton: $("#submitButto"), 
-        nextBit: $("#question3"), 
+    setupQuestion({
+        trueButton: $("#trueButto"),
+        falseButton: $("#falseButto"),
+        submitButton: $("#submitButto"),
+        nextBit: $("#question3"),
         cookieName: "answeredQ2"
-    })
+    });
 
     addClick($("#startAgain"), startAgainClick);
 }
@@ -47,7 +47,7 @@ function setupQuestion(elements) {
     }
 
     function trueClick() {
-    
+
         elements.trueButton.addClass("selected");
         elements.falseButton.removeClass("selected");
 
@@ -63,7 +63,7 @@ function setupQuestion(elements) {
     }
 
     function submitClick() {
-            
+
         if (elements.trueButton.hasClass("selected"))
             setCookie(elements.cookieName, "true");
 
@@ -85,6 +85,6 @@ function startAgainClick() {
 
     resetCookie("answeredQ1");
     resetCookie("answeredQ2");
-            
-    location.reload(false)
+
+    location.reload(false);
 }
