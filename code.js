@@ -10,6 +10,7 @@ function runPage() {
         trueButton: $("#trueButton"),
         falseButton: $("#falseButton"),
         submitButton: $("#submitButton"),
+        
         nextBit: $("#question2"),
         cookieName: "answeredQ1"
     } );
@@ -18,6 +19,7 @@ function runPage() {
         trueButton: $("#trueButto"),
         falseButton: $("#falseButto"),
         submitButton: $("#submitButto"),
+        
         nextBit: $("#question3"),
         cookieName: "answeredQ2"
     } );
