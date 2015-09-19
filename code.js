@@ -23,20 +23,24 @@ function runPage() {
         addClick($("#falseButton"), falseClick);
     }
 
-    addClick($("#startAgain"), startAgainClick);
-    
-    addClick($("#trueButto"), trueClic);
-    addClick($("#falseButto"), falseClic);
-
     if (getCookie("answeredQ2")) {
 
         if (getCookie("answeredQ2") == "true")
-            $("#trueButto").addClass("selected");
+            $("#trueButto2").addClass("selected");
 
         else if (getCookie("answeredQ2") == "false")
             $("#falseButto").addClass("selected");
 
     }
+    else {
+
+        $("#question3").hide();
+
+        addClick($("#trueButto"), trueClic);
+        addClick($("#falseButto"), falseClic);
+    }
+
+    addClick($("#startAgain"), startAgainClick);
 }
 
 
@@ -105,6 +109,7 @@ function submitClic() {
 function startAgainClick() {
 
     resetCookie("answeredQ1");
+    resetCookie("answeredQ2");
     resetCookie("doneFirst");
     resetCookie("doneNext");
             
