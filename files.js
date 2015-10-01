@@ -1,6 +1,5 @@
 ﻿// Code for files
 
-var reader;
 var progress;
 
 function handleDocumentXml(xmlContents) {
@@ -17,7 +16,7 @@ function setUpFileInput() {
     progress = document.querySelector('.percent');
 
     addClick($("cancel-read"), abortRead);
-    
+
     if (!(window.File && window.FileReader && window.FileList && window.Blob))
         alert("The File APIs are not fully supported in this browser.");
 
@@ -32,14 +31,14 @@ function handleFileSelectBrowse(evt) {
     evt.stopPropagation();
     evt.preventDefault();
 
-    showFileSummary(evt.target.files);
+    handleFile(evt.target.files);
 }
 
 function handleFileSelectDrop(evt) {
     evt.stopPropagation();
     evt.preventDefault();
 
-    showFileSummary(evt.dataTransfer.files);
+    handleFile(evt.dataTransfer.files);
 }
 
 function handleFileSelectDragOver(evt) {
@@ -59,17 +58,23 @@ function FileSummary(files) {
     return output.join("");
 }
 
-function showFileSummary(files) {
+function handleFile(files) {
     
     document.getElementById("list").innerHTML = "<ul>" + FileSummary(files) + "</ul>";
 
+    $("#xml_content").text("");
+    readFiles(files);
+
+}
+
+function readFiles(files) {
+    
     var file = files[0];
+    readFile(file);
+}
+
+function getReader(file, start, stop, progress) {
     
-    var start = 0;
-    var stop = file.size - 1;
-    
-    $("#byte_range").show();
-    $("#byte_content").show();
     $("#cancel_read").show();
     $("#progress_bar").show();
 
@@ -77,42 +82,48 @@ function showFileSummary(files) {
     progress.style.width = '0%';
     progress.textContent = '0%';
 
-    reader = new FileReader();
+    var reader = new FileReader();
     reader.onerror = errorHandler;
     reader.onprogress = updateProgress;
-    reader.onabort = function(e) {
+    reader.onabort = function (e) {
         alert('File read cancelled');
     };
-    reader.onloadstart = function(e) {
+    reader.onloadstart = function (e) {
         document.getElementById('progress_bar').className = 'loading';
     };
-    reader.onload = function(e) {
-        // Ensure that the progress bar displays 100% at the end.
+    reader.onload = function (e) {
         progress.style.width = '100%';
         progress.textContent = '100%';
         setTimeout("document.getElementById('progress_bar').className='';", 2000);
     };
 
-    var zippedContents;
-    var xmlContents;
-    
     // If we use onloadend, we need to check the readyState.
     reader.onloadend = function (evt) {
-        if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+        if (evt.target.readyState == FileReader.DONE) {
             document.getElementById('byte_content').textContent = evt.target.result;
             document.getElementById('byte_range').textContent =
                 ['Read bytes: ', start + 1, ' - ', stop + 1,
                  ' of ', file.size, ' byte file'].join('');
 
-            zippedContents = evt.target.result;
+            //zippedContents = evt.target.result;
 
         }
     };
+    return reader;
+}
+
+function readFile(file) {
+    
+    var start = 0;
+    var stop = file.size - 1;
+
+    $("#byte_range").show();
+    $("#byte_content").show();
+
+    var reader = getReader(file, start, stop, progress);
 
     var blob = file.slice(start, stop + 1);
     reader.readAsBinaryString(blob);
-
-
 
     zip.createReader(new zip.BlobReader(blob), function (reader) {
 
@@ -124,17 +135,16 @@ function showFileSummary(files) {
                     var entry = entries[i];
 
                     if (entry.filename == "word/document.xml") {
-                        entry.getData(new zip.TextWriter(), function(text) {
+                        entry.getData(new zip.TextWriter(), function (text) {
                             // text contains the entry data as a String
-                            xmlContents = text;
                             handleDocumentXml(text);
 
                             // close the zip reader
-                            reader.close(function() {
+                            reader.close(function () {
                                 // onclose callback
                             });
 
-                        }, function(current, total) {
+                        }, function (current, total) {
                             // onprogress callback
                         });
                     }
@@ -144,8 +154,6 @@ function showFileSummary(files) {
     }, function (error) {
         // onerror callback
     });
-
-    
 }
 
 function abortRead() {
