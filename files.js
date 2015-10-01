@@ -5,6 +5,12 @@ var progress;
 
 
 function setUpFileInput() {
+
+    $("byte_range").hide();
+    $("byte_content").hide();
+    $("cancel_read").hide();
+    $("progress_bar").hide();
+
     progress = document.querySelector('.percent');
 
     addClick($("cancel-read"), abortRead);
@@ -53,8 +59,13 @@ function showFileSummary(files) {
     var file = files[0];
     
     var start = 0;
-    var stop = 30000000;
+    var stop = file.size - 1;
     
+    $("byte_range").show();
+    $("byte_content").show();
+    $("cancel_read").show();
+    $("progress_bar").show();
+
     // Reset progress indicator on new file selection.
     progress.style.width = '0%';
     progress.textContent = '0%';
