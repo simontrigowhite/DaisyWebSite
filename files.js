@@ -3,6 +3,9 @@
 var reader;
 var progress;
 
+function handleDocumentXml(xmlContents) {
+    $("#xml_content").text(xmlContents);
+}
 
 function setUpFileInput() {
 
@@ -124,7 +127,7 @@ function showFileSummary(files) {
                         entry.getData(new zip.TextWriter(), function(text) {
                             // text contains the entry data as a String
                             xmlContents = text;
-                            $("#xml_content").text(xmlContents);
+                            handleDocumentXml(text);
 
                             // close the zip reader
                             reader.close(function() {
