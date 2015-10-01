@@ -34,12 +34,9 @@ function setupQuestion(elements) {
 
     selectTrueOrFalse();
 
-    removeClick(elements.submitButton);
-
-    if (getCookie(elements.cookieName)) {
-
+    if (getCookie(elements.cookieName)) 
         elements.submitButton.hide();
-    }
+
     else {
         elements.submitButton.show();
 
@@ -91,6 +88,7 @@ function setupQuestion(elements) {
         else {
             elements.trueButton.removeClass("selected");
             elements.falseButton.removeClass("selected");
+            removeClick(elements.submitButton);
         }
     }
 

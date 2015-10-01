@@ -41,4 +41,24 @@ function showFileSummary(files) {
             "</li>");
     }
     document.getElementById("list").innerHTML = "<ul>" + output.join("") + "</ul>";
+
+    var file = files[0];
+    
+    var reader = new FileReader();
+
+    var start = 0;
+    var stop = 22;
+    
+    // If we use onloadend, we need to check the readyState.
+    reader.onloadend = function (evt) {
+        if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+            document.getElementById('byte_content').textContent = evt.target.result;
+            document.getElementById('byte_range').textContent =
+                ['Read bytes: ', start + 1, ' - ', stop + 1,
+                 ' of ', file.size, ' byte file'].join('');
+        }
+    };
+
+    var blob = file.slice(start, stop + 1);
+    reader.readAsBinaryString(blob);
 }
