@@ -1,8 +1,6 @@
 // Code for the quiz - the functionality. Written in JavaScript language.
 
 
-
-
 $(document).ready(runPage);
 
 
@@ -10,7 +8,7 @@ function runPage() {
 
     setUpFileInput();
     
-    setupQuestion({
+    setupQuestion( {
         trueButton: $("#trueButton"),
         falseButton: $("#falseButton"),
         submitButton: $("#submitButton"),
@@ -34,13 +32,16 @@ function runPage() {
 
 function setupQuestion(elements) {
 
-    if (getCookie(elements.cookieName)) {
+    selectTrueOrFalse();
 
-        selectTrueOrFalse();
+    removeClick(elements.submitButton);
+
+    if (getCookie(elements.cookieName)) {
 
         elements.submitButton.hide();
     }
     else {
+        elements.submitButton.show();
 
         addClick(elements.trueButton, trueClick);
         addClick(elements.falseButton, falseClick);
@@ -78,12 +79,19 @@ function setupQuestion(elements) {
     }
     
     function selectTrueOrFalse() {
-        
-        if (getCookie(elements.cookieName) == "true")
-            elements.trueButton.addClass("selected");
 
-        else if (getCookie(elements.cookieName) == "false")
+        if (getCookie(elements.cookieName) == "true") {
+            elements.trueButton.addClass("selected");
+            elements.falseButton.removeClass("selected");
+        }
+        else if (getCookie(elements.cookieName) == "false") {
+            elements.trueButton.removeClass("selected");
             elements.falseButton.addClass("selected");
+        }
+        else {
+            elements.trueButton.removeClass("selected");
+            elements.falseButton.removeClass("selected");
+        }
     }
 
     function rememberTrueOrFalse() {
@@ -102,5 +110,5 @@ function startAgainClick() {
     resetCookie("answeredQ1");
     resetCookie("answeredQ2");
 
-    location.reload(false);
+    runPage();
 }
