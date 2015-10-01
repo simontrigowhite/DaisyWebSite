@@ -8,7 +8,7 @@ function setUpFileInput() {
 
     $("#byte_range").hide();
     $("#byte_content").hide();
-    $("#cancel_read").hide(); // not working?
+    $("#cancel_read").hide();
     $("#progress_bar").hide();
 
     progress = document.querySelector('.percent');
@@ -45,8 +45,7 @@ function handleFileSelectDragOver(evt) {
     evt.dataTransfer.dropEffect = "copy";
 }
 
-
-function showFileSummary(files) {
+function FileSummary(files) {
     var output = [];
     for (var i = 0, f; f = files[i]; i++) {
         output.push("<li><strong>", escape(f.name), "</strong> (", f.type || "n/a", ") - ",
@@ -54,7 +53,12 @@ function showFileSummary(files) {
             f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : "n/a",
             "</li>");
     }
-    document.getElementById("list").innerHTML = "<ul>" + output.join("") + "</ul>";
+    return output.join("");
+}
+
+function showFileSummary(files) {
+    
+    document.getElementById("list").innerHTML = "<ul>" + FileSummary(files) + "</ul>";
 
     var file = files[0];
     
@@ -107,27 +111,31 @@ function showFileSummary(files) {
 
 
 
-    // use a BlobReader to read the zip from a Blob object
     zip.createReader(new zip.BlobReader(blob), function (reader) {
 
         // get all entries from the zip
         reader.getEntries(function (entries) {
             if (entries.length) {
 
-                // get first entry content as text
-                entries[0].getData(new zip.TextWriter(), function (text) {
-                    // text contains the entry data as a String
-                    xmlContents = text;
-                    $("#xml_content").text(xmlContents);
+                for (var i = 0; i < entries.length; i++) {
+                    var entry = entries[i];
 
-                    // close the zip reader
-                    reader.close(function () {
-                        // onclose callback
-                    });
+                    if (entry.filename == "word/document.xml") {
+                        entry.getData(new zip.TextWriter(), function(text) {
+                            // text contains the entry data as a String
+                            xmlContents = text;
+                            $("#xml_content").text(xmlContents);
 
-                }, function (current, total) {
-                    // onprogress callback
-                });
+                            // close the zip reader
+                            reader.close(function() {
+                                // onclose callback
+                            });
+
+                        }, function(current, total) {
+                            // onprogress callback
+                        });
+                    }
+                }
             }
         });
     }, function (error) {
