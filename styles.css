@@ -61,7 +61,7 @@ body {
     padding-top: 10px;
 }
 
-#byte_content {
+#byte_content, #xml_content {
     margin: 5px 0;
     max-height: 100px;
     overflow-y: auto;
@@ -78,12 +78,14 @@ body {
     -moz-transition: opacity 1s linear;
     -o-transition: opacity 1s linear;
     -webkit-transition: opacity 1s linear;
-  }
-  #progress_bar.loading {
+}
+
+#progress_bar.loading {
     opacity: 1.0;
-  }
-  #progress_bar .percent {
+}
+
+#progress_bar .percent {
     background-color: #99ccff;
     height: auto;
     width: 0;
-  }
+}

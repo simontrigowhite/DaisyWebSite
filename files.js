@@ -6,10 +6,10 @@ var progress;
 
 function setUpFileInput() {
 
-    $("byte_range").hide();
-    $("byte_content").hide();
-    $("cancel_read").hide();
-    $("progress_bar").hide();
+    $("#byte_range").hide();
+    $("#byte_content").hide();
+    $("#cancel_read").hide(); // not working?
+    $("#progress_bar").hide();
 
     progress = document.querySelector('.percent');
 
@@ -61,10 +61,10 @@ function showFileSummary(files) {
     var start = 0;
     var stop = file.size - 1;
     
-    $("byte_range").show();
-    $("byte_content").show();
-    $("cancel_read").show();
-    $("progress_bar").show();
+    $("#byte_range").show();
+    $("#byte_content").show();
+    $("#cancel_read").show();
+    $("#progress_bar").show();
 
     // Reset progress indicator on new file selection.
     progress.style.width = '0%';
@@ -86,6 +86,9 @@ function showFileSummary(files) {
         setTimeout("document.getElementById('progress_bar').className='';", 2000);
     };
 
+    var zippedContents;
+    var xmlContents;
+    
     // If we use onloadend, we need to check the readyState.
     reader.onloadend = function (evt) {
         if (evt.target.readyState == FileReader.DONE) { // DONE == 2
@@ -93,11 +96,45 @@ function showFileSummary(files) {
             document.getElementById('byte_range').textContent =
                 ['Read bytes: ', start + 1, ' - ', stop + 1,
                  ' of ', file.size, ' byte file'].join('');
+
+            zippedContents = evt.target.result;
+
         }
     };
 
     var blob = file.slice(start, stop + 1);
     reader.readAsBinaryString(blob);
+
+
+
+    // use a BlobReader to read the zip from a Blob object
+    zip.createReader(new zip.BlobReader(blob), function (reader) {
+
+        // get all entries from the zip
+        reader.getEntries(function (entries) {
+            if (entries.length) {
+
+                // get first entry content as text
+                entries[0].getData(new zip.TextWriter(), function (text) {
+                    // text contains the entry data as a String
+                    xmlContents = text;
+                    $("#xml_content").text(xmlContents);
+
+                    // close the zip reader
+                    reader.close(function () {
+                        // onclose callback
+                    });
+
+                }, function (current, total) {
+                    // onprogress callback
+                });
+            }
+        });
+    }, function (error) {
+        // onerror callback
+    });
+
+    
 }
 
 function abortRead() {
