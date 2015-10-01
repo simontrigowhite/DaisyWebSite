@@ -1,7 +1,14 @@
 ﻿// Code for files
 
+var reader;
+var progress;
+
 
 function setUpFileInput() {
+    progress = document.querySelector('.percent');
+
+    addClick($("cancel-read"), abortRead);
+    
     if (!(window.File && window.FileReader && window.FileList && window.Blob))
         alert("The File APIs are not fully supported in this browser.");
 
@@ -32,6 +39,7 @@ function handleFileSelectDragOver(evt) {
     evt.dataTransfer.dropEffect = "copy";
 }
 
+
 function showFileSummary(files) {
     var output = [];
     for (var i = 0, f; f = files[i]; i++) {
@@ -44,11 +52,29 @@ function showFileSummary(files) {
 
     var file = files[0];
     
-    var reader = new FileReader();
-
     var start = 0;
-    var stop = 22;
+    var stop = 30000000;
     
+    // Reset progress indicator on new file selection.
+    progress.style.width = '0%';
+    progress.textContent = '0%';
+
+    reader = new FileReader();
+    reader.onerror = errorHandler;
+    reader.onprogress = updateProgress;
+    reader.onabort = function(e) {
+        alert('File read cancelled');
+    };
+    reader.onloadstart = function(e) {
+        document.getElementById('progress_bar').className = 'loading';
+    };
+    reader.onload = function(e) {
+        // Ensure that the progress bar displays 100% at the end.
+        progress.style.width = '100%';
+        progress.textContent = '100%';
+        setTimeout("document.getElementById('progress_bar').className='';", 2000);
+    };
+
     // If we use onloadend, we need to check the readyState.
     reader.onloadend = function (evt) {
         if (evt.target.readyState == FileReader.DONE) { // DONE == 2
@@ -61,4 +87,35 @@ function showFileSummary(files) {
 
     var blob = file.slice(start, stop + 1);
     reader.readAsBinaryString(blob);
+}
+
+function abortRead() {
+    reader.abort();
+}
+
+function errorHandler(evt) {
+    switch (evt.target.error.code) {
+        case evt.target.error.NOT_FOUND_ERR:
+            alert('File Not Found!');
+            break;
+        case evt.target.error.NOT_READABLE_ERR:
+            alert('File is not readable');
+            break;
+        case evt.target.error.ABORT_ERR:
+            break; // noop
+        default:
+            alert('An error occurred reading this file.');
+    };
+}
+
+function updateProgress(evt) {
+    // evt is an ProgressEvent.
+    if (evt.lengthComputable) {
+        var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+        // Increase the progress bar length.
+        if (percentLoaded < 100) {
+            progress.style.width = percentLoaded + '%';
+            progress.textContent = percentLoaded + '%';
+        }
+    }
 }
