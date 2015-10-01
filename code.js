@@ -1,8 +1,28 @@
 // Code for the quiz - the functionality. Written in JavaScript language.
 
 
-function handleFileSelect(evt) {
+function handleFileSelectBrowse(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
     var files = evt.target.files; // FileList object
+    
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+        output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+            f.size, ' bytes, last modified: ',
+            f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+            '</li>');
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+}
+
+function handleFileSelectDrop(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object
 
     // files is a FileList of File objects. List some properties.
     var output = [];
@@ -14,6 +34,13 @@ function handleFileSelect(evt) {
     }
     document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
+
+function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+}
+
 
 
 
@@ -29,7 +56,13 @@ function runPage() {
         alert('The File APIs are not fully supported in this browser.');
     }
 
-    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    document.getElementById('files').addEventListener('change', handleFileSelectBrowse, false);
+
+
+    // Setup the dnd listeners.
+    var dropZone = document.getElementById('drop_zone');
+    dropZone.addEventListener('dragover', handleDragOver, false);
+    dropZone.addEventListener('drop', handleFileSelectDrop, false);
 
 
     setupQuestion({
